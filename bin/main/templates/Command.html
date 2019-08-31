@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Command</title>
+</head>
+<body>
+	<form method="POST" action="Result" >
+		職業：<span th:text="${job}"> </span></br>
+			<input type="hidden" name="job" th:value="${job}"> </br>
+		名前：<span th:text="${name}"></span>
+			<input type="hidden" name="name" th:value="${name}"> </br>
+
+	<input type="submit"  name="command" value="たたかう">
+	<input type="submit" name="command" value="かいふく">
+
+	</form>
+
+</body>
+</html>

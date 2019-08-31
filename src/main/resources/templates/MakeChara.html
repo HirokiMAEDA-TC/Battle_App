@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>MakeChara</title>
+</head>
+<body>
+
+	<form method="POST" action="Command">
+
+		<h1>キャラ作成</h1>
+		職業：
+		<input type="radio" name="job" value="戦士" checked>戦士
+		<input type="radio" name="job" value="魔法使い">魔法使い
+		<input type="radio" name="job" value="武闘家">武闘家
+		</br>
+
+		名前：
+		<input type="text" name="name" value="">
+		</br>
+
+		<input type="submit" value="次へ">
+
+	</form>
+</body>
+</html>
