@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Action</title>
+</head>
+
+<body>
+
+	<article>
+				<h1>なかま</h1>
+		<table border="1">
+
+			<tr>
+				<th:block th:each="chara: ${charaList}">
+
+					<td width="150">
+					職業：<span th:text="${chara.job}"></span></br>
+					名前：<span th:text="${chara.name}"></span></br>
+
+					H P :<span th:text="${chara.hp}"></span>
+						/
+						<span th:text="${chara.maxHp}"></span></br>
+					ATK:<span th:text="${chara.atk}"></span></br>
+					DEF:<span th:text="${chara.def}"></span></br>
+					</td>
+				</th:block>
+			</tr>
+
+		</table>
+
+	<div style="padding: 10px; margin-bottom: 10px; width: 600px; border: 1px solid #333333; border-radius: 10px;">
+
+			<p>パーティーを作成しました。</p>
+
+	</div>
+
+
+	<form method="POST" action="EncountEnemy">
+		<input type="submit" value="たんさく">
+	</form>
+
+</body>
+</html>

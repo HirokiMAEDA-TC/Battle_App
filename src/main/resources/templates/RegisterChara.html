@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+
+<title>CharaRegister</title>
+</head>
+
+
+
+
+<body>
+	<div>
+	<article>
+		<h1>とうろく</h1>
+
+			<form method="POST" action="RegisterChara">
+
+				職業：
+					<input type="radio" name="job" value="戦士" checked="checked">戦士
+					<input type="radio" name="job" value="魔法使い">魔法使い
+					<input type="radio" name="job" value="武闘家">武闘家
+				</br>
+
+				名前：
+				<input type="text" name="name" value="">
+				</br>
+
+				<span style="line-height:200%"></span>
+				<input type="submit" value="次へ">
+		</form>
+	</article>
+
+	</div>
+
+</br>
+
+
+	<div>
+	<article>
+
+		<h1>なかま</h1>
+		<table border="1">
+
+			<tr>
+				<th:block th:each="chara: ${charaList}">
+
+					<td width="150">
+					職業：<span th:text="${chara.job}"></span></br>
+					名前：<span th:text="${chara.name}"></span></br>
+
+					H P :<span th:text="${chara.maxHp}"></span></br>
+					ATK:<span th:text="${chara.atk}"></span></br>
+					DEF:<span th:text="${chara.def}"></span></br>
+					</td>
+				</th:block>
+			</tr>
+
+		</table>
+
+		<form form method="POST" action="Action" >
+			<input type="submit" value="完了">
+		</form>
+
+	</article>
+	</div>
+</body>
+</html>

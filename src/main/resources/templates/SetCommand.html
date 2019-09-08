@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Result</title>
+<title>Set Command</title>
 </head>
+
+
 <body>
 
 	<article>
@@ -51,7 +53,16 @@
 						</section>
 
 
+						<section>
+							<form method="POST" action="Command">
+								<!-- 受け渡し用のキャラID -->
+								<!-- ID：<span th:text="${chara.charaId}"> </span></br> -->
+								<input type="hidden" name="charaId" th:value="${chara.charaId}">
 
+								<input type="submit"  name="command" value="たたかう">
+								<input type="submit" name="command" value="かいふく">
+							</form>
+						</section>
 
 				</th:block>
 			</tr>
@@ -61,18 +72,5 @@
 	</article>
 
 
-	<div style="padding: 10px; margin-bottom: 10px; width: 600px; border: 1px solid #333333; border-radius: 10px;">
-
-			<th:block th:each= "msg: ${msgList}">
-
-			<p><span th:text="${msg}"></span></p>
-
-			</th:block>
-	</div>
-
-
-	<form method="POST" action="BattleCalculation">
-		<input type="submit" value="つぎへ">
-	</form>
 </body>
 </html>

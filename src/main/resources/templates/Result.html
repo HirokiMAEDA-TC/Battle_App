@@ -5,8 +5,74 @@
 <title>Result</title>
 </head>
 <body>
-	<form method="POST">
-		<span th:text="${msg}"></span>
+
+	<article>
+		<h1>てき</h1>
+		<table border="1">
+
+			<tr>
+				<th:block th:each="enemy: ${enemyList}">
+
+					<td width="150">
+						<section>
+							<span th:text="${enemy.name}"></span><span th:text="${enemy.suffix}"></span></br>
+
+
+							H P :<span th:text="${enemy.hp}"></span></br>
+							ATK:<span th:text="${enemy.atk}"></span></br>
+							DEF:<span th:text="${enemy.def}"></span></br>
+						</section>
+					</td>
+				</th:block>
+			</tr>
+		</table>
+	</article>
+
+
+	<article>
+		<h1>なかま</h1>
+
+		<table border="1">
+
+			<tr>
+				<th:block th:each="chara: ${charaList}">
+
+					<td width="150">
+						<section>
+							職業：<span th:text="${chara.job}"> </span></br>
+							名前：<span th:text="${chara.name}"></span></br>
+
+
+							H P :<span th:text="${chara.hp}"></span>
+								/
+								<span th:text="${chara.maxHp}"></span></br>
+							ATK:<span th:text="${chara.atk}"></span></br>
+							DEF:<span th:text="${chara.def}"></span></br>
+						</section>
+
+
+
+
+				</th:block>
+			</tr>
+
+		</table>
+
+	</article>
+
+
+	<div style="padding: 10px; margin-bottom: 10px; width: 600px; border: 1px solid #333333; border-radius: 10px;">
+
+			<th:block th:each= "msg: ${msgList}">
+
+			<p><span th:text="${msg}"></span></p>
+
+			</th:block>
+	</div>
+
+
+	<form method="POST" action="BattleCalculation">
+		<input type="submit" value="つぎへ">
 	</form>
 </body>
 </html>

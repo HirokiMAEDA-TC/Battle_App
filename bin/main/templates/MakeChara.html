@@ -4,23 +4,32 @@
 <meta charset="UTF-8">
 <title>MakeChara</title>
 </head>
+
+
+
 <body>
+	<div>
+	<article>
+		<form method="POST" action="RegisterChara">
 
-	<form method="POST" action="Command">
+			<h1>とうろく</h1>
 
-		<h1>キャラ作成</h1>
-		職業：
-		<input type="radio" name="job" value="戦士" checked>戦士
-		<input type="radio" name="job" value="魔法使い">魔法使い
-		<input type="radio" name="job" value="武闘家">武闘家
-		</br>
+				職業：
+					<input type="radio" name="job" value="戦士" checked="checked">戦士
+					<input type="radio" name="job" value="魔法使い">魔法使い
+					<input type="radio" name="job" value="武闘家">武闘家
+				</br>
 
-		名前：
-		<input type="text" name="name" value="">
-		</br>
+				名前：
+				<input type="text" name="name" value="">
+				</br>
 
-		<input type="submit" value="次へ">
+				<span style="line-height:200%"></span>
+				<input type="submit" value="次へ">
+		</form>
+	</article>
 
-	</form>
+	</div>
+
 </body>
 </html>
