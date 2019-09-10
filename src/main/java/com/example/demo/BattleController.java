@@ -57,6 +57,7 @@ public class BattleController {
 
 
 	//メッセージ
+	String msg = "";
 	List<String> msgList = new ArrayList<String>();
 
 
@@ -118,6 +119,7 @@ public class BattleController {
 			session.setAttribute("CharaList", charaList);
 			}
 
+
 		mav.addObject("charaList", charaList);
 		mav.setViewName("RegisterChara");
 
@@ -129,11 +131,17 @@ public class BattleController {
 
 
 	//=============================行動画面==================================
-	@RequestMapping(value="Action", method=RequestMethod.POST)
+	@RequestMapping(value="Action", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView Action(ModelAndView mav) {
 
 		@SuppressWarnings("unchecked")
-		List<Character> charaList = (List<Character>) session.getAttribute("CharaList");
+		List<Character> charaList = (List<Character>) session.getAttribute("CharaList");
+		if(msg=="") {
+		msg = "パーティーを作成しました!";
+		}
+
+		mav.addObject("msg", msg);
+
 
 		mav.addObject("charaList", charaList);
 		return mav;
@@ -148,7 +156,11 @@ public class BattleController {
 	public ModelAndView EncountEnemy(ModelAndView mav) {
 
 		enemyList = encountEnemy.EncountEnemy(0, "ゴブリン", 'A');
-		enemyList = encountEnemy.EncountEnemy(1, "ゴブリン", 'B');
+
+		//30%の確立で敵Bが出現
+		if(new java.util.Random().nextInt(10) < 3) {
+			enemyList = encountEnemy.EncountEnemy(1, "ゴブリン", 'B');
+		}
 
 		mav.addObject("enemyList", enemyList);
 		session.setAttribute("enemyList", enemyList);
@@ -228,6 +240,8 @@ public class BattleController {
 		HashMap<Integer, String> CommandListMap = (HashMap<Integer, String>) session.getAttribute("commandList");
 		List<Goblin> enemyList = (List<Goblin>) session.getAttribute("enemyList");
 
+		int enemyNum = 0;	//てき数
+
 
 		for(Integer charaId : CommandListMap.keySet()) {
 
@@ -238,9 +252,8 @@ public class BattleController {
 			String weapon ="";
 			String recover_tool ="";
 
-
 			//敵情報を取得
-			int enemyNum = enemyList.size();
+			enemyNum = enemyList.size();
 			int enemyId = new java.util.Random().nextInt(enemyNum);
 			Goblin enemy = enemyList.get(enemyId);
 
@@ -296,10 +309,17 @@ public class BattleController {
 
 			msgList.add(msg);
 
+			//てき死亡判定
 			if(enemy.getHp() <= 0) {
 				enemyList.remove(enemyId);
 				msg = enemy.getName() + enemy.getSuffix() + "をたおした！";
+				enemyNum--;
 				msgList.add(msg);
+
+				//てきの数が0になったら戦闘終了
+				if(enemyNum == 0) {
+					break;
+				}
 			}
 
 		}
@@ -308,11 +328,14 @@ public class BattleController {
 
 		List<Character> charaList = (List<Character>) session.getAttribute("CharaList");
 
+
+		mav.addObject("enemyNum", enemyNum);
 		mav.addObject("charaList", charaList);
 		mav.addObject("enemyList", enemyList);
 
 
 		mav.addObject("msgList", msgList);
+
 
 
 		mav.setViewName("Result");
@@ -343,7 +366,8 @@ public class BattleController {
 			if(!(enemyList.isEmpty())) {
 				return "redirect:SetCommand";
 			} else {
-				return "redirect:MakeChara";
+				msg = "てきをたおした!";
+				return "redirect:Action";
 			}
 
 		}
